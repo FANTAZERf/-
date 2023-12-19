@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru"></html>
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<link rel="stylesheet" href="styles.css">
+<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.min.js"></script>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+  <title>Онлайн журнал оценок</title>
+  <style>
+    .tabs {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+    .tabs a {
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+    .tabs a:hover {
+        background-color: #ddd;
+    }
+    .tabs a.active {
+        background-color: #ccc;
+    }
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+    }
+    .chart_div {
+      background-color: #b3b3b3;
+    }
+</style>
+</head>
+<body>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+
+
+  <div id="tabs" class="menu">
+    <div class="title"> <h1><span>Ж</span>урнал</h1> </div>
+    <div class="list_menu">
+        <ul>
+            <li><a href="javascript:void(0)" onclick="openTab(event, 'download'); showtable()">Загрузка журнала</a></li>
+            <li><a href="javascript:void(0)" onclick="openTab(event, 'edit'); showtable()" > Редактирование журнала</a> </li>
+            <li><a href="javascript:void(0)" onclick="openTab(event, 'stat'); showtable()">Таблица оценок</a></li>
+            <li><a href="javascript:void(0)" onclick="openTab(event, 'graph'); hidetable()">График оценок</a></li>
+            <li><a href="javascript:void(0)" onclick="openTab(event, 'help'); hidetable()">Помощь</a></li>
+            <li><a href="javascript:void(0)" onclick="openTab(event, 'about'); hidetable()">О разработчике</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="footer_menu">
+      <p>Демчак 2023</p>
+    </div>
+    <div class="content">
+
+    
+
+  <div id="download" class="tabcontent">
+    
+    <h3>Скачивание файлов</h3>
+    <input type="file" id="fileInput" accept=".csv, .txt, .xlsx">
+    <button onclick="handleFileUpload()">Загрузить</button>
+
+
+  </div>
+
+  
+
+  <div id="edit" class="tabcontent">
+    <h3>Редактировать оценки</h3>
+    <button onclick="addTableData()">Добавить строку</button>
+    <button onclick="deleterow(); addcells()">Добавить столбец</button>
+    <button onclick="createtable()">Создать журнал</button>
+  </div>
+
+
+  <div id="stat" class="tabcontent">
+    <h3>Статистика (таблица)</h3>
+    <button onclick=" sred(2); sred2(1); kolvo(); xyunya()">Загрузить статистику</button>
+    <table id="stat2" border="1">
+      <tr>
+        <td>Оценка</td>
+        <td>5</td>
+        <td>4</td>
+        <td>3</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Количество учеников</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Процент учеников</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+  </table>
+  </div>
+
+  <div id="graph" class="tabcontent">
+    <h3>Статистика (график)</h3>
+    <button onclick="removeAllColumns(); drawChart()">Показать график</button>
+    <div id="chart_div" style="width: 900px; height: 900px;"></div>
+  </div>
+
+  <div id="help" class="tabcontent">
+    <h3>Помощь</h3>
+    <p>Это приложение для ведения онлайн-журнала оценки.</p>
+    <p>Он предоставляет функциональные возможности для загрузки данных об оценках, создания и редактирования записей журнала, отображения статистики как в табличном, так и в графическом форматах и многого другого. Для редактирования ячейки просто нажмите на неё.</p>
+  </div>
+
+  <div id="about" class="tabcontent">
+    <h3>О разработчике</h3>
+    <p>Прекрасный человек</p>
+    <img src="ГОРИН.jpg">
+  </div>
+  <table border="1" onclick="editTD()" id="downloadTable"></table>
+</div>
+
+  <script>
+    function openTab(evt, tabName) {
+
+
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+  </script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+ 
+  function drawChart() {
+     var data = new google.visualization.DataTable();
+     data.addColumn('string', 'Ученик');
+     data.addColumn('number', 'Средний балл');
+ 
+     var table = document.getElementById('downloadTable');
+     var numRows = table.rows.length;
+ 
+     for (var i = 1; i < numRows; i++) {
+       var row = table.rows[i];
+       var category = row.cells[0].innerText;
+       var value = parseFloat(row.cells[1].innerText);
+       data.addRow([category, value]);
+     }
+ 
+     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+     chart.draw(data);
+  }
+ </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.title h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    margin-bottom: 50px;
+    color: #fcfffc;
+}
+
+.title span{
+    color: #ff7b00;
+}
+
+.list_menu a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: #fcfffc;
+    border-left: 2px solid #ff7b00;
+    padding-left: 5px ;
+    transition: all 0.2s ease;
+}
+
+.list_menu a:hover{
+    border-left: 2px solid #ff7b00;
+    padding-left: 10px ;
+    transition: all 0.2s ease;
+}
+
+.footer_menu p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #fcfffc;
+}
+
+.list_menu li{
+    margin: 25px 0;
+    color: #fcfffc;
+
+}
+.menu {
+    padding: 25vh 50px;
+    position: fixed;
+    background: rgba(20, 20, 20, 0.5);
+    height: 100vh;
+    backdrop-filter: blur(16px); 
+    width: 420px;
+}
+
+body {
+    height: 100vh;
+
+    background-image: url(фон2.jpg);
+    }
+
+.content {
+    color: #fcfffc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    width: auto;
+    height: auto;
+
+    margin-left: 422px;
+    word-wrap: break-word;
+    hyphens: manual;
+}
+
+p{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    hyphens: manual;
+}
+h3{
+
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: #000000;
+    text-align: center;
+
+}
+td {
+    min-width: 100px; 
+    height: 25px;
+    background-color: #bebebe;
+    color: #000000;
+    font-weight: bold;
+   }
+
+
+input{
+    text-align: center;
+    background: transparent;
+    height: calc(100%);
+    width: calc(100%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: #000000;
+}
+
