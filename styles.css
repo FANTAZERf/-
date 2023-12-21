@@ -121,6 +121,10 @@ input{
 .tabcontent p{
     margin-top: 10px;
     font-size: 25px;
-    font-family: carbonara;
+    font-family: carbonara ;
 }
 
+@font-face {
+    font-family: "carbonara" ;
+    src: url(carbonara.ttf);
+}
