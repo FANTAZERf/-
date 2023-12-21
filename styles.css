@@ -29,7 +29,9 @@
     border-left: 2px solid #ff7b00;
     padding-left: 10px ;
     transition: all 0.2s ease;
+    color: #ff7b00;
 }
+
 
 .footer_menu p{
     font-family: Arial, Helvetica, sans-serif;
@@ -63,10 +65,11 @@ body {
     font-size: 15px;
     width: auto;
     height: auto;
-
+    border-left: 2px solid #ff7b00;
     margin-left: 422px;
     word-wrap: break-word;
     hyphens: manual;
+    
 }
 
 p{
@@ -78,6 +81,7 @@ h3{
 
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
 }
 
 table{
@@ -92,7 +96,7 @@ td {
     height: 25px;
     background-color: #bebebe;
     color: #000000;
-    font-weight: bold;
+    font-weight: normal;
    }
 
 
@@ -104,5 +108,19 @@ input{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     color: #000000;
+    
+}
+
+.profile-pic {
+    width: 200px; height: 200px; border-radius: 100%; 
+    background-image: url('ГОРИН.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.tabcontent p{
+    margin-top: 10px;
+    font-size: 25px;
+    font-family: carbonara;
 }
 

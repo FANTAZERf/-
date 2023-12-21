@@ -1,5 +1,5 @@
 var a;
-
+var b = false;
 function handleFileUpload() {
   var fileInput = document.getElementById("fileInput");
   var file = fileInput.files[0];
@@ -103,7 +103,7 @@ function deleterow(){
   }
 }
 
-function deleteCell() {
+function deleteCell2() {
   var table = document.getElementById("downloadTable");
   var rowCount = table.rows.length;
   for (var i = 0; i < rowCount; i++) {
@@ -120,27 +120,7 @@ function deleteCell() {
   }
  }
 
-function deletecell(){
-  var table = document.getElementById("downloadTable");
-  var cell = table.getElementsByTagName("td");
-  
-  for (var i = 0; i < cells.length; i++) {
-   var rows = cells[i].getElementsByTagName("tr");
-   var isEmpty = true;
-  
-   for (var j = 0; j < rows.length; j++) {
-      if (rows[j].innerText.trim() !== "") {
-        isEmpty = false;
-        break;
-      }
-   }
-  
-   if (isEmpty) {
-     
-    
-   }
-  }
-}
+
 
 function editTD() {
   var table = document.getElementById("downloadTable");
@@ -201,36 +181,32 @@ function editTD() {
   var table = document.getElementById("downloadTable");
   var sum = 0;
   var count = 0;
+  var t = document.getElementById("deti").value;
  
   for (var i = 1; i < table.rows.length; i++) {
      var row = table.rows[i];
      var cell = row.cells[k]; 
+
  
      // проверка на пустоту ячейки и наличие в ней числа
-     if (cell && !isNaN(parseInt(cell.innerText))) { 
-       sum += parseInt(cell.innerText);
+     if ((cell && !isNaN(parseInt(cell.innerText)))) { 
+      if ((table.rows[i].cells[1].textContent == t)||(t=="")){
+       sum += parseInt(table.rows[i].cells[k].innerText);
        count++;
      }
   }
- 
+}
   var average = sum / count;
   return average;
  }
- 
+
  function sred(N){
-  var table = document.getElementById("downloadTable");
-  var cells = table.getElementsByTagName("td");
-  var row = table.insertRow(-1); // вставить новую строку в конец таблицы
-  for (var i = 0; i < table.rows[0].cells.length-1; i++) {
-    var cell = row.insertCell(-1); // вставить новую ячейку в конец строки
-    if (i < N){
-      cell.textContent = " ";
-    }
-    else{
-      cell.textContent = average(i).toFixed(2).toString();
-    }
+  var table = document.getElementById('downloadTable');
+  var stat = document.getElementById('stat3');
+  for (var i = 1; i < stat.rows[0].cells.length; i++) {
+    stat.rows[1].cells[i].textContent = average(i+1).toFixed(2).toString();
   }
- }
+}
 
  function average2(i) {
   var table = document.getElementById("downloadTable");
@@ -265,6 +241,7 @@ function editTD() {
          cell.textContent = average2(i).toFixed(2).toString();
        }
      }
+     b = true;
   }
 
   function countObjects(searchValue) {
@@ -272,7 +249,7 @@ function editTD() {
     let rows = table.getElementsByTagName('tr');
     let count = 0;
     let c=0;
-    for (let i = 0; i < rows.length-1; i++) {
+    for (let i = 0; i < rows.length; i++) {
         let cells = rows[i].getElementsByTagName('td');
         for (let j = 0; j < cells.length-1; j++) {
             if (cells[j].innerHTML == searchValue) {
@@ -302,7 +279,7 @@ function xyunya(){
   var rows = table.getElementsByTagName("tr");
   var cells = rows[2].getElementsByTagName("td");
  for (var i = 1; i < table.rows[0].cells.length; i++) {
-    cells[i].textContent = (((countObjects(6-i)))/(table2.rows.length-2)*100).toFixed(2).toString();
+    cells[i].textContent = (((countObjects(6-i)))/(table2.rows.length-1)*100).toFixed(2).toString();
  }
 }
 
@@ -334,12 +311,12 @@ function grafic(){
  }
 
 }
-function removeAllColumns() {
+function removeAllColumns(M, K) {
   var table = document.getElementById("downloadTable");
   var rows = table.getElementsByTagName("tr");
   
   // delete all columns except the first and last
-  for (var i = rows.length - 1; i > -1; i--) {
+  for (var i = rows.length - 2; i > -1; i--) {
       var cells = rows[i].getElementsByTagName("td");
       for (var j = cells.length - 2; j > 0; j--) {
           cells[j].parentNode.removeChild(cells[j]);
@@ -347,3 +324,142 @@ function removeAllColumns() {
   }
   table.deleteRow(rows.length-1);
   }
+
+  function trimTextToSpace(text) {
+    let spaceIndex = text.indexOf(' ');
+    if (spaceIndex > -1) {
+        text = text.substring(0, spaceIndex);
+    }
+    return text;
+}
+
+function trash(){
+  
+  // получить таблицу
+let table = document.getElementById('downloadTable');
+
+// удалить последний столбец
+let lastColumn = table.rows[0].cells.length-1;
+for (var i=0; i<table.rows.length; i++) {
+    table.rows.deleteCell(lastColumn);
+}
+
+// удалить последнюю строку
+var rows = table.getElementsByTagName("tr");
+table.deleteRow(table.rows.length - 1);
+b = false;
+}
+
+function tabotkrit(){
+  var currentTab = document.querySelector('a.active');
+if (b = true){
+  if (currentTab == "download" || currentTab == "edit" || currentTab =="help"|| currentTab == "about"){
+    trash();
+    }
+  }
+}
+
+function getMedianstr() {
+  var table = document.getElementById("downloadTable");
+  var rows = table.getElementsByTagName("tr");
+  var cells = rows.getElementsByTagName('td');
+
+  var numbers = [];
+  for (var i = 0; i < cells.length; i++) {
+    numbers.push(parseInt(cells[i].innerHTML));
+  }
+
+  numbers.sort(function(a, b) {
+    return a - b;
+  });
+
+  var medianIndex = Math.floor(numbers.length / 2);
+
+  if (numbers.length % 2 === 0) {
+    return (numbers[medianIndex - 1] + numbers[medianIndex]) / 2;
+  } else {
+    return numbers[medianIndex];
+  }
+}
+
+function getMedianst(v) {
+  var table = document.getElementById("downloadTable");
+  var rows = table.getElementsByTagName("tr");
+  var t = document.getElementById("deti").value;
+  var numbers = [];
+ 
+  for (var i = 1; i < rows.length; i++) {
+     var cell = rows[i].getElementsByTagName('td')[v];
+     if (cell) {
+      if ((table.rows[i].cells[1].textContent == t)||(t=="")){
+       numbers.push(parseInt(cell.innerHTML));
+     }
+  }
+}
+  numbers.sort(function(a, b) {
+     return a - b;
+  });
+ 
+  var medianIndex = Math.floor(numbers.length / 2);
+ 
+  if (numbers.length % 2 === 0) {
+     return (numbers[medianIndex - 1] + numbers[medianIndex]) / 2;
+  } else {
+     return numbers[medianIndex];
+  }
+ }
+ 
+ function med1(){
+  var table = document.getElementById('downloadTable');
+  var stat = document.getElementById('stat3');
+ 
+  for (var i = 1; i < stat.rows[0].cells.length; i++) {
+     var median = getMedianst(i+1);
+     stat.rows[2].cells[i].textContent = median.toFixed(2).toString();
+  }
+}
+
+function countObjects2(searchValue, nomer) {
+  let table = document.getElementById("downloadTable");
+  let rows = table.getElementsByTagName('tr');
+  var t = document.getElementById("deti").value;
+  let count = 0;
+  let c=0;
+  for (let i = 1; i < rows.length; i++) {
+      let cells = rows[i].getElementsByTagName('td');
+          if (cells[nomer].innerHTML == searchValue) {
+            if ((table.rows[i].cells[1].textContent == t)||(t=="")){
+              count++;
+          }}
+      if (count > 0){
+        c++;
+        count=0;
+      }
+  }
+  return c;
+}
+
+function deticlassa(){
+  let table = document.getElementById("downloadTable");
+  var t = document.getElementById("deti").value;
+  var count = 0;
+  for (var i = 1; i < table.rows.length; i++){
+    if ((table.rows[i].cells[1].textContent == t)||(t=="")){
+      count++;
+  }
+}
+return count;
+}
+
+ function kolvo2(){
+  var t = document.getElementById("deti").value;
+  let table = document.getElementById("stat4");
+  let table2 = document.getElementById("downloadTable");
+  var rows = table.getElementsByTagName("tr");
+  
+  for (let i = 1; i < rows.length; i++) {
+  for (var j = 1; j < table.rows[0].cells.length; j++) {
+     rows[i].cells[j].textContent = countObjects2(6-i,j+1).toString()+"шт"+"-"+(((countObjects2(6-i,j+1)))/(deticlassa())*100).toFixed(2).toString()+"%";
+  }
+ }
+}
