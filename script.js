@@ -504,7 +504,7 @@ function getTextFromCell(cell, startPosition) {
 function drawChart() {
   var cvet = ['#583075','#ff0000','#00ff00','#764097','#583075'];
   var options = {
-     backgroundColor: '#a0a1a6', 
+     backgroundColor: transparent, 
      width: 1000, // минимальная ширина графика
      height: 1000,
      legend: { position: 'top' },
@@ -515,7 +515,9 @@ function drawChart() {
         2: {targetAxisIndex: 2},
         3: {targetAxisIndex: 3},
         4: {targetAxisIndex: 4},
-     }
+     },
+        hAxis: {color: 'white'},
+    vAxis: {color: 'white'},
   };
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Ученик');
