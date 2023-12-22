@@ -504,7 +504,7 @@ function getTextFromCell(cell, startPosition) {
 function drawChart() {
   var cvet = ['#583075','#ff0000','#00ff00','#764097','#583075'];
   var options = {
-     backgroundColor: transparent, 
+     backgroundColor: "#a0a1a6", 
      width: 1000, // минимальная ширина графика
      height: 1000,
      legend: { position: 'top' },
