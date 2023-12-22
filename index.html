@@ -172,7 +172,18 @@
 
   <div id="graph" class="tabcontent">
     <h3></i>Статистика (график)</h3>
-    <button onclick="removeAllColumns(); drawChart()">Показать график</button>
+    <input type="text" id="deti2" placeholder="Класс">
+    <div style="text-align: center; margin: 0; padding: 0;" id="diagramma">
+    <input type="radio" name="gender" value="dsred" id="dsred">
+    <label for="dsred">Средний балл</label>
+    <input type="radio" name="gender" value="dmed" id="dmed">
+    <label for="dmed">Медиана</label>
+    <input type="radio" name="gender" value="dkolvo" id="dkolvo">
+    <label for="dkolvo">Количество оценок</label>
+    <input type="radio" name="gender" value="dprocent" id="dprocent" >
+    <label for="dprocent">Процент</label>
+  </div>
+    <button onclick="svazat(); drawChart()">Показать график</button>
     <div class="graficc" id="chart_div" style="width: 1000px; height: 1000px;"></div>
   </div>
 
@@ -229,31 +240,8 @@
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
- 
-  function drawChart() {
-    var options = {
-      backgroundColor:  '#a0a1a6', 
-      width: 1000, // минимальная ширина графика
-      height: 1000,
-      legend: { position: 'top' },
-    };
-     var data = new google.visualization.DataTable();
-     data.addColumn('string', 'Ученик');
-     data.addColumn('number', 'Средний балл');
- 
-     var table = document.getElementById('downloadTable');
-     var numRows = table.rows.length;
- 
-     for (var i = 1; i < numRows; i++) {
-       var row = table.rows[i];
-       var category = row.cells[0].innerText;
-       var value = parseFloat(row.cells[1].innerText);
-       data.addRow([category, value]);
-     }
- 
-     var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-     chart.draw(data,options);
-  }
+
+  drawChart();
  </script>
 
   <script src="script.js"></script>

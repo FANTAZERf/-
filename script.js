@@ -463,3 +463,96 @@ return count;
   }
  }
 }
+
+function vibortablica(){
+  for (var i = 0; i < 4; i++){
+    var t = document.getElementById("diagramma").getElementsByTagName("input")[i];
+    var checkedValue = t.checked ? t.value : '';
+if((checkedValue == "dsred")) {
+  return "stat3";
+}
+if (checkedValue == "dmed")
+  return "stat3";
+  if (checkedValue == "dkolvo")
+  return "stat4";
+  if (checkedValue == "dprocent")
+  return "stat4";
+}
+}
+
+function viborstroka(){
+  for (var i = 0; i < 4; i++){
+    var t = document.getElementById("diagramma").getElementsByTagName("input")[i];
+    var checkedValue = t.checked ? t.value : '';
+if(checkedValue == "dsred") {
+  return 1;
+}
+  if (checkedValue == "dmed") 
+  return 2;
+  if (checkedValue == "dkolvo")
+  return 3;
+  if (checkedValue == "dprocent")
+  return 4;
+}
+}
+
+function getTextFromCell(cell, startPosition) {
+  var cellText = cell.textContent || cell.innerText;
+  return cellText.substring(startPosition);
+}
+
+function drawChart() {
+  var cvet = ['#583075','#ff0000','#00ff00','#764097','#583075'];
+  var options = {
+     backgroundColor: '#a0a1a6', 
+     width: 1000, // минимальная ширина графика
+     height: 1000,
+     legend: { position: 'top' },
+     colors: ['#583075','#ff0000','#00ff00','#764097','#583075'],
+     series:{
+       0: {targetAxisIndex: 0},
+        1: {targetAxisIndex: 1},
+        2: {targetAxisIndex: 2},
+        3: {targetAxisIndex: 3},
+        4: {targetAxisIndex: 4},
+     }
+  };
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Ученик');
+    data.addColumn('number', '');
+ 
+    var table = document.getElementById(vibortablica());
+    var numRows = table.rows.length;
+    var i = viborstroka();
+    if (vibortablica()== "stat3"){
+     for (var j = 1; j < table.rows[0].cells.length; j++){
+      var category = table.rows[0].cells[j].innerText;
+      var value = parseFloat(table.rows[i].cells[j].innerText);
+      data.addRow([category, value]);
+     }
+      
+  }
+  else{
+     for (var l = 1; l < table.rows.length; l++){
+       for (var j = 1; j < table.rows[0].cells.length; j++){
+         var category = table.rows[0].cells[j].innerText+" "+(6-l);
+         if (i == 3){
+         var value = parseFloat(table.rows[l].cells[j].innerText);
+         }
+         if (i == 4)
+         var value = parseFloat(table.rows[l].cells[j].innerText.substring(table.rows[l].cells[j].innerText.indexOf("-",3)+1));
+         data.addRow([category, value]);
+     }
+  }
+  }
+    var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+    chart.draw(data,options);
+ }
+
+ function svazat(){
+  let table = document.getElementById("deti");
+  let table2 = document.getElementById("deti2");
+    table.value = table2.value;
+    kolvo2(); sred(2); med1();
+ }
+
